@@ -5,3 +5,4 @@ Scripts/
 share/
 *.cfg
 bulldozer-regression-project/bluebook-for-bulldozers/
+/dogvision/dog-breed-identification/
