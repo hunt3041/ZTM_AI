@@ -45,3 +45,5 @@ Here we want to open a docker container mapping the current working directory to
 This can be done using the command: `docker run --gpus all -it -v $PWD:/working -w /working tensorflow/tensorflow:latest-gpu bash`
 
 Now you can access your working directory within the docker container. All files should be saved to the working directory when docker container is exited.
+
+**Note:** See tensorflow-bootcamp repo or dogvision README's for more on running dockerfiles.

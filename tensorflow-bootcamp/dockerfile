@@ -1,0 +1,47 @@
+# This is a dockerfile for opening a container suited for tensorflow machine learning with GPU support
+
+# Future work: Make jupyter notebook token constant so that vscode can consistently access jupyter server.
+
+# Use the official TensorFlow GPU-enabled Jupyter Notebook image as a parent image
+FROM tensorflow/tensorflow:latest-gpu-jupyter
+
+# Set the working directory to /app (optional)
+WORKDIR /app
+
+# Install Graphviz
+RUN apt-get update && apt-get install -y graphviz
+
+# Upgrade pip 
+RUN pip install --upgrade pip
+
+# Install additional Python libraries
+RUN pip install numpy pandas matplotlib scikit-learn graphviz
+
+# Install pydot version 1.4.2
+RUN pip install pydot==1.4.2
+
+# Install tensorflow-hub
+RUN pip install --upgrade tensorflow-hub
+
+# Install TensorBoard
+RUN pip install TensorBoard
+
+# Downgrade tf-keras to fix compatability bug
+RUN pip install tf_keras==2.15.1
+
+
+# Define environment variables if needed
+ENV NAME World
+
+# Expose port 8888 for Jupyter Notebook
+EXPOSE 8888
+
+# Expose port 6006 for TensorBoard
+EXPOSE 6006
+
+# Run Jupyter Notebook when the container launches
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+
+# Run in working directory with `docker run --gpus all -it -v $PWD:/DIRNAME -w /DIRNAME -p 8888:8888 CONTAINER_NAME`
+
+
